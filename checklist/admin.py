@@ -12,6 +12,11 @@ class CheckListTabInline(admin.TabularInline):
     model = CheckListTab
     extra = 0
 
+class CheckListTabAdmin(admin.ModelAdmin):
+    list_display = ("title", )
+    list_filter = ("title", )
+    prepopulated_fields = {"slug": ("title", )}
+
 class CheckListTabItemAdmin(admin.ModelAdmin):
     list_display = ("title", "choices", "tab", )
     list_filter = ("title", )
@@ -33,7 +38,7 @@ class AnswerAdmin(admin.ModelAdmin):
     list_filter = ("created", )    
 
 
-admin.site.register(CheckListTab)
+admin.site.register(CheckListTab, CheckListTabAdmin)
 admin.site.register(CheckListTabItem, CheckListTabItemAdmin)
 admin.site.register(Inspection, InspectionAdmin)
 admin.site.register(Response, ResponseAdmin)

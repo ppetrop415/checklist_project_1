@@ -113,8 +113,8 @@ class CheckListTabItem(models.Model):
     is_important = models.BooleanField(_("Is Important"), blank=True)
         
     class Meta:
-        verbose_name = _("Checklist Tab Item")
-        verbose_name_plural = _("Checklist Tabs Items")
+        verbose_name = _("Checklist Item")
+        verbose_name_plural = _("Checklist Items")
         ordering = ("order",)
 
     def save(self, *args, **kwargs):
