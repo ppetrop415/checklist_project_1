@@ -35,7 +35,7 @@ class Business(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(blank=True)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    VAT = models.PositiveIntegerField()
+    vat = models.PositiveIntegerField()
 
     def __str__(self):
         return self.title
