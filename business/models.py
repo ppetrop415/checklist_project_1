@@ -53,8 +53,8 @@ class BranchStore(models.Model):
     address = models.CharField(max_length=100)
     address_number = models.PositiveSmallIntegerField()
     email = models.EmailField(max_length=150)
-    # activity = models.ForeignKey(Activity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
-    # type_of_activity = activity = models.ForeignKey(TypeOfActivity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
+    activity = models.ForeignKey(Activity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
+    type_of_activity = activity = models.ForeignKey(TypeOfActivity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
 
     def __str__(self):
         return self.title
