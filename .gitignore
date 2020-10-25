@@ -1,0 +1,4 @@
+*_pyc
+db.sqlite3
+
+uploaded_media/

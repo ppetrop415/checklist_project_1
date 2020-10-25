@@ -1,8 +1,40 @@
 from django.contrib import admin
-from .models import Activity, TypeOfActivity, CheckListTab
+from .models import CheckListTab, CheckListTabItem, Inspection, Response, Answer
 # Register your models here.
 
 
-admin.site.register(Activity)
-admin.site.register(TypeOfActivity)
+class CheckListTabItemInline(admin.StackedInline):
+    model = CheckListTabItem
+    ordering = ("order", "tab")
+    extra = 1
+
+class CheckListTabInline(admin.TabularInline):
+    model = CheckListTab
+    extra = 0
+
+class CheckListTabItemAdmin(admin.ModelAdmin):
+    list_display = ("title", "choices", "tab", )
+    list_filter = ("title", )
+    prepopulated_fields = {"slug": ("title", )}
+
+class InspectionAdmin(admin.ModelAdmin):
+    list_display = ("branch_store", "classification", )
+    list_filter = ("classification", )
+    inlines = [CheckListTabInline, CheckListTabItemInline]
+    # prepopulated_fields = {"slug": ("title", )}
+
+
+class ResponseAdmin(admin.ModelAdmin):
+    # list_display = (msg, "inspection_uuid", "created", )
+    list_filter = ("created", )
+
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ("check_list_item", "response", "body", "created", )
+    list_filter = ("created", )    
+
+
 admin.site.register(CheckListTab)
+admin.site.register(CheckListTabItem, CheckListTabItemAdmin)
+admin.site.register(Inspection, InspectionAdmin)
+admin.site.register(Response, ResponseAdmin)
+admin.site.register(Answer, AnswerAdmin)
