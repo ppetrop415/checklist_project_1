@@ -1,4 +1,6 @@
-*_pyc
+__pycache__
+migrations
 db.sqlite3
 
 uploaded_media/
+*.pyc

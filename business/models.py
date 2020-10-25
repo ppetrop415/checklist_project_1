@@ -43,18 +43,18 @@ class Business(models.Model):
 class BranchStore(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(blank=True)
-    business = models.ForeignKey(Business, on_delete=models.PROTECT)
+    business = models.ForeignKey(Business, on_delete=models.PROTECT, related_name="branchstores")
     health_regulator = models.ForeignKey(User, on_delete=models.PROTECT)
     notify_number = models.IntegerField()
-    region = models.ForeignKey(Region, on_delete=models.PROTECT)
-    region_unity = models.ForeignKey(RegionUnity, on_delete=models.PROTECT)
-    state = models.ForeignKey(State, on_delete=models.PROTECT)
-    zip_code = models.ForeignKey(ZipCode, on_delete=models.PROTECT)
+    region = models.ForeignKey(Region, on_delete=models.PROTECT, related_name="branchstores")
+    region_unity = models.ForeignKey(RegionUnity, on_delete=models.PROTECT, related_name="branchstores")
+    state = models.ForeignKey(State, on_delete=models.PROTECT, related_name="branchstores")
+    zip_code = models.ForeignKey(ZipCode, on_delete=models.PROTECT, related_name="branchstores")
     address = models.CharField(max_length=100)
     address_number = models.PositiveSmallIntegerField()
     email = models.EmailField(max_length=150)
     activity = models.ForeignKey(Activity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
-    type_of_activity = activity = models.ForeignKey(TypeOfActivity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
+    type_of_activity = models.ForeignKey(TypeOfActivity, on_delete=models.SET_NULL, null=True, related_name="branchstores")
 
     def __str__(self):
         return self.title
