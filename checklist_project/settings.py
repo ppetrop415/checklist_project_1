@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'checklist',
 ]
 
+CHOICES_SEPARATOR = ","
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
