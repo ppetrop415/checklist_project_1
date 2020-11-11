@@ -7,10 +7,12 @@ class CheckListTabItemInline(admin.StackedInline):
     model = CheckListTabItem
     ordering = ("order", "tab")
     extra = 1
+    prepopulated_fields = {"slug": ("title", )}
 
 class CheckListTabInline(admin.TabularInline):
     model = CheckListTab
     extra = 0
+    prepopulated_fields = {"slug": ("title", )}
 
 class CheckListTabAdmin(admin.ModelAdmin):
     list_display = ("title", )

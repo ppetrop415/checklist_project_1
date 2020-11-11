@@ -6,14 +6,17 @@ from .models import Region, RegionUnity, State, ZipCode
 class RegionUnityAdmin(admin.ModelAdmin):
     list_display = ("title", "region",)
     list_filter = ("region", )
+    prepopulated_fields = {"slug": ("title", )}
 
 class StateAdmin(admin.ModelAdmin):
     list_display = ("title", "region_unity", )
     list_filter = ("region_unity__region", )
+    prepopulated_fields = {"slug": ("title", )}
 
 class ZipCodeAdmin(admin.ModelAdmin):
     list_display = ("number", "state", )
     list_filter = ("state", "state__region_unity", )
+    prepopulated_fields = {"slug": ("number", )}
 
 admin.site.register(Region)
 admin.site.register(RegionUnity, RegionUnityAdmin)
