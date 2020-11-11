@@ -32,7 +32,7 @@ class InspectionAdmin(admin.ModelAdmin):
 
 
 class ResponseAdmin(admin.ModelAdmin):
-    # list_display = (msg, "inspection_uuid", "created", )
+    list_display = ("inspection_uuid", "inspection", "get_inspectors", "created", )
     list_filter = ("created", )
 
 class AnswerAdmin(admin.ModelAdmin):
