@@ -159,7 +159,7 @@ class Response(models.Model):
         return msg
 
     def get_inspectors(self):
-        return ",".join([str(p) for p in self.inspectors.all()])
+        return ", ".join([str(p) for p in self.inspectors.all()])
 
 class Answer(models.Model):
     check_list_item = models.ForeignKey(CheckListTabItem, on_delete=models.CASCADE, verbose_name=_("Checklist Item"), related_name="answers")

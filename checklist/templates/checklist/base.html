@@ -32,26 +32,24 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
-    {%  include 'navbar.html' %}
+    {%  include 'checklist/navbar.html' %}
 
-    {%  include 'sidebar.html' %}
+    {%  include 'checklist/sidebar.html' %}
 
     <div class="content-wrapper">
     
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1 class="m-0">{% block content_header %}{% endblock %}</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-    
-    {%  include 'status.html' %}
-    
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <h1 class="m-0">{% block content_header %}{% endblock %}</h1>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        
     {% block content %}
 
 
@@ -60,7 +58,7 @@
 
     </div>
 
-    {%  include 'footer.html' %}
+    {%  include 'checklist/footer.html' %}
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

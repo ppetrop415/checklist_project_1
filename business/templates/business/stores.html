@@ -1,0 +1,81 @@
+{% extends 'checklist/base.html' %}
+
+{% block content_header %}BranchStores{% endblock %}
+
+{% block content %}
+
+    <!-- Main content -->
+    <section class="content">
+    <div class="container-fluid">
+
+        <!-- TABLE: LATEST ORDERS -->
+        <div class="card">
+            <div class="card-header border-transparent">
+                <h3 class="card-title">Businesses</h3>
+
+                <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+                </button> 
+            </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped m-0">
+                <thead>                    
+                <tr>
+                    <th style="width: 150px;">Title</th>
+                    <th>Owner</th>
+                    <th>Health Regulator</th>
+                    <th>VAT</th>
+                    <th>Activity</th>
+                    <th>State</th>
+                    <th style="width: 100px;">Classify</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+
+                    {% for store in stores %}
+                    <tr>
+                        <td><a href="pages/examples/invoice.html">{{store.business.title}}</a></td>
+                        <td>{{store.health_regulator.get_full_name}}</td>
+                        <td>{{store.health_regulator.get_full_name}}</td>
+                        <td>{{store.business.vat}}</td>
+                        <td>{{store.activity}}</td>
+                        <td>{{store.state}}</td>
+                        <td><span class="badge badge-success">Low</span></td>
+                        
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+            <nav aria-label="Business Page Navigation">
+                <ul class="pagination justify-content-center m-0">
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                <li class="page-item"><a class="page-link" href="#">7</a></li>
+                <li class="page-item"><a class="page-link" href="#">8</a></li>
+                </ul>
+            </nav>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+{% endblock %}

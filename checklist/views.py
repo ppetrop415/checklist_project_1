@@ -19,4 +19,4 @@ def home(request):
         'high_danger':high_danger
     }
 
-    return render(request, 'home.html', context)
+    return render(request, 'checklist/dashboard.html', context)
