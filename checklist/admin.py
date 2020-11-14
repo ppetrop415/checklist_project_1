@@ -25,9 +25,9 @@ class CheckListTabItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
 
 class InspectionAdmin(admin.ModelAdmin):
-    list_display = ("branch_store", "classification", )
+    list_display = ("branch_store", "get_inspectors", "score", "classification", )
     list_filter = ("classification", )
-    inlines = [CheckListTabInline, CheckListTabItemInline]
+    # inlines = [CheckListTabInline, CheckListTabItemInline]
     # prepopulated_fields = {"slug": ("title", )}
 
 

@@ -53,6 +53,7 @@ class Inspection(models.Model):
     classification = models.SmallIntegerField(
         _("Display method"), choices=DISPLAY_METHOD_CHOICES
     )
+    score = models.PositiveSmallIntegerField(blank=True, null=True)
     
 
     class Meta:
@@ -61,6 +62,31 @@ class Inspection(models.Model):
 
     def __str__(self):
         return str(self.branch_store)
+
+    def get_sorted_tabs(self):
+        return self.tabs.all().order_by('order')
+
+    def eav_report_data(self):
+        report_data = []
+        inspectors = self.inspectors.order_by('full_name')
+        tabs = self.tabs.get_sorted_tabs()
+        items = self.items.get_sorted_items()
+        for inspector in inspectors:
+            inspector_data = [inspector.full_name]
+            inspector_responses = inspector.get_response_dict()
+            for tab in tabs:
+                for item in items:
+                    if item.id in inspector_responses:
+                        inspector_data.append(inspector_responses[item.id])
+                    else:
+                        inspector_data.append(None)
+                report_data.append(inspector_data)
+            report_data.append(inspector_data)
+        return tabs, items, report_data
+    
+    def get_inspectors(self):
+        return ", ".join([str(p) for p in self.inspectors.all()])
+    
 
 class CheckListTab(models.Model):
     title = models.CharField(_("Title"), max_length=100)
@@ -76,6 +102,9 @@ class CheckListTab(models.Model):
         verbose_name = _("Checklist Tab")
         verbose_name_plural = _("Checklist Tabs")
         ordering = ("order",)
+
+    def get_sorted_items(self):
+        return self.items.all().order_by('order')
 
 class CheckListTabItem(models.Model):
 
@@ -160,6 +189,12 @@ class Response(models.Model):
 
     def get_inspectors(self):
         return ", ".join([str(p) for p in self.inspectors.all()])
+
+    def get_response_dict(self):
+        response_dict = dict()
+        for answer in self.answers.all():
+            response_dict[answer.checklistitem_id] = answer.body
+        return response_dict
 
 class Answer(models.Model):
     check_list_item = models.ForeignKey(CheckListTabItem, on_delete=models.CASCADE, verbose_name=_("Checklist Item"), related_name="answers")

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Inspection
+from django.views.generic import ListView
+from .models import Inspection, Response
 from business.models import Business
 
 # Create your views here.
@@ -20,3 +21,14 @@ def home(request):
     }
 
     return render(request, 'checklist/dashboard.html', context)
+
+
+
+class InspectionListView(ListView):
+    model = Inspection
+    template_name = "checklist/inspections.html"
+    context_object_name = 'inspections'
+    paginate_by = 10
+    queryset = Response.objects.select_related('inspection').prefetch_related('inspectors')
+    
+    

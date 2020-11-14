@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import home
+from .views import home, InspectionListView
 
 urlpatterns = [
     path('', home, name="dashboard"),
+    path('inspections/', InspectionListView.as_view(), name="inspections")
 ]

@@ -1,0 +1,150 @@
+{% extends 'checklist/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+  
+          <!-- Default box -->
+          <div class="card">
+              <div class="card-header">
+                  <h3 class="card-title">Inspections</h3>
+  
+                  <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                      </button>
+                  </div>
+              </div>
+              <!-- /.card-header -->
+  
+              <div class="card-body table-responsive p-0">
+              <table class="table table-striped  projects">
+                  <thead>
+                      <tr>
+                          <th style="width: 1%">
+                              #
+                          </th>
+                          <th style="width: 20%">
+                              Business
+                          </th>
+                          <th style="width: 20%">
+                              Inspectors
+                          </th>
+                          <th>
+                              Score
+                          </th>
+                          <th style="width: 8%" class="text-center">
+                              Danger
+                          </th>
+                          <th style="width: 20%">
+                          </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for queryset in page_obj %}                 
+
+                        <tr>
+                            <td>#</td>
+                            <td>
+                                <a>{{queryset.inspection.branch_store}}</a>
+                                <br/>
+                                <small>{{queryset.created}}</small>
+                                <br/> 
+                                <small><b>#</b>{{queryset.inspection_uuid}}</small>
+
+                            </td>
+                            <td>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="{% static 'images/avatar.png' %}">
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="{% static 'images/avatar2.png' %}">
+                                    </li>
+    
+                                </ul>
+                            </td>
+                            <td class="project_progress">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                    </div>
+                                </div>
+                                <small>
+                                    {{queryset.inspection.score}}
+                                </small>
+                            </td>
+                          <td class="project-state">
+                              <span class="badge  
+                                {% if queryset.inspection.classification == 0 %}
+                                    badge-success
+                                {% elif queryset.inspection.classification == 1 %}
+                                    badge-warning
+                                {% else %}
+                                    badge-danger
+                                {% endif %}">{{queryset.inspection.classification}}</span>
+                          </td>
+                          <td class="project-actions text-right">
+                              <a class="btn btn-primary btn-sm" href="invoice2.html">
+                                  <i class="fas fa-eye">
+                                  </i>
+  
+                              </a>
+                              <a class="btn btn-info btn-sm" href="#">
+                                  <i class="fas fa-file-pdf">
+                                  </i>
+  
+                              </a>
+                              <a class="btn btn-danger btn-sm" href="#">
+                                  <i class="fas fa-print">
+                                  </i>
+  
+                              </a>
+                          </td>
+                      </tr>
+                      
+                    {% endfor %}
+                      
+                      
+                  </tbody>
+              </table>
+              </div>
+              <!-- /.card-body -->
+  
+
+            <div class="card-footer">
+                <nav aria-label="Inspections Page Navigation">
+                    <ul class="pagination justify-content-center m-0">
+                        {% if page_obj.has_previous %}
+
+                            <li class="page-item active"><a class="page-link" href="?page=1">1</a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+
+                        {% endif %}
+
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+                        {% if page_obj.has_next %}
+
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a></li>
+
+                        {% endif %}
+
+                    </ul>
+                </nav>
+            </div>
+  
+        </div>
+        <!-- /.card -->
+  
+    </div><!-- /.container-fluid -->
+    </section>
+      <!-- /.content -->
+
+{% endblock %}
+    
