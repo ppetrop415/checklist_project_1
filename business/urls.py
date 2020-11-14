@@ -15,8 +15,8 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import branchstore
+from .views import BranchStoreListView
 
 urlpatterns = [
-    path('', branchstore, name='stores'),
+    path('', BranchStoreListView.as_view(), name='stores'),
 ]
