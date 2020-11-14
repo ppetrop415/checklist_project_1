@@ -10,6 +10,7 @@ class BranchStoreListView(ListView):
     model = BranchStore
     template_name = "business/stores.html"
     context_object_name = 'stores'
+    paginate_by = 10
 
 
 

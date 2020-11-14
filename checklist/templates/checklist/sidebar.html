@@ -1,5 +1,7 @@
 {% load static %}
-  
+ {% url 'dashboard' as dashboard %}
+ {% url 'inspections' as inspections %}
+ {% url 'stores' as stores %}
   
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-danger elevation-4">
@@ -29,7 +31,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{% url 'dashboard' %}" class="nav-link active">
+            <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == dashboard %} active {% endif %}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -40,7 +42,7 @@
 
           <li class="nav-header">Tasks</li>
           <li class="nav-item">
-            <a href="new_inspection.html" class="nav-link">
+            <a href="new_inspection.html" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 New Inspection
@@ -48,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'inspections' %}" class="nav-link">
+            <a class="nav-link {% if request.path == inspections %} active {% endif %}" href="{% url 'inspections' %}" >
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Inspections
@@ -57,9 +59,9 @@
           </li>
           <li class="nav-item">
             <a href="{% url 'stores' %}" class="nav-link 
-            {% block nav_store_active %}
-              
-            {% endblock nav_store_active %}
+              {% if request.path == stores %}
+                  active
+              {% endif %}
               ">
               <i class="nav-icon fas fa-store-alt"></i>
               <p>
