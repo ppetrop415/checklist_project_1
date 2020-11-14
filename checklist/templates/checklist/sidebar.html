@@ -2,6 +2,7 @@
  {% url 'dashboard' as dashboard %}
  {% url 'inspections' as inspections %}
  {% url 'stores' as stores %}
+ {% url 'activities' as activities %}
   
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-danger elevation-4">
@@ -58,10 +59,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'stores' %}" class="nav-link 
-              {% if request.path == stores %}
-                  active
-              {% endif %}
+            <a href="{% url 'stores' %}" class="nav-link {% if request.path == stores %} active {% endif %}
               ">
               <i class="nav-icon fas fa-store-alt"></i>
               <p>
@@ -92,7 +90,29 @@
             <a href="users_of_business.html" class="nav-link">
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
-                Businesses
+                Business Owners
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="users_of_business.html" class="nav-link">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                Health Regulators
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-header">Infos</li>
+          <li class="nav-item">
+            <a href="{% url 'activities' %}" class="nav-link               
+            {% if request.path == activities %}
+              active
+            {% endif %}">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Activities
               </p>
             </a>
           </li>

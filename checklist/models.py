@@ -1,4 +1,7 @@
+from django.urls import reverse 
+
 from business.models import BranchStore
+
 import uuid
 import logging
 from django.conf import settings
@@ -81,11 +84,14 @@ class Inspection(models.Model):
                     else:
                         inspector_data.append(None)
                 report_data.append(inspector_data)
-            report_data.append(inspector_data)
+            report_data.append(inspector_responses)
         return tabs, items, report_data
     
     def get_inspectors(self):
         return ", ".join([str(p) for p in self.inspectors.all()])
+    
+    def get_absolute_url(self):
+        return reverse('inspection-detail', kwargs={'pk': self.pk})
     
 
 class CheckListTab(models.Model):

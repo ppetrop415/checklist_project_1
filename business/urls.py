@@ -15,8 +15,10 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import BranchStoreListView
+from .views import BranchStoreListView, ActivityListView, ActivityDetailView
 
 urlpatterns = [
     path('', BranchStoreListView.as_view(), name='stores'),
+    path('activities', ActivityListView.as_view(), name='activities'),
+    path('activity/<slug:slug>/', ActivityListView.as_view(), name='activity-detail'),
 ]

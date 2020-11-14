@@ -1,3 +1,5 @@
+from django.urls import reverse 
+
 from django.db import models
 from django.contrib.auth.models import User
 from regions.models import Region, RegionUnity, State, ZipCode
@@ -18,6 +20,9 @@ class Activity(models.Model):
         verbose_name = _("Activity")
         verbose_name_plural = _("Activities")
         ordering = ("order",)
+
+    def get_absolute_url(self):
+        return reverse('activity-detail', kwargs={'slug': self.slug})
 
 class TypeOfActivity(models.Model):
     title = models.CharField(_("Title"), max_length=100)
@@ -58,3 +63,6 @@ class BranchStore(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('inspection-detail', kwargs={'slug': self.slug})

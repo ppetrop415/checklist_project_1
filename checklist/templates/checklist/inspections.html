@@ -86,10 +86,10 @@
                                     badge-warning
                                 {% else %}
                                     badge-danger
-                                {% endif %}">{{queryset.inspection.classification.value}}</span>
+                                {% endif %}">{{queryset.inspection.classification }}</span>
                           </td>
                           <td class="project-actions text-right">
-                              <a class="btn btn-primary btn-sm" href="invoice2.html">
+                              <a class="btn btn-primary btn-sm" href="{{ queryset.inspection.get_absolute_url }}">
                                   <i class="fas fa-eye">
                                   </i>
   
@@ -145,6 +145,7 @@
     </div><!-- /.container-fluid -->
     </section>
       <!-- /.content -->
+
 
 {% endblock %}
     

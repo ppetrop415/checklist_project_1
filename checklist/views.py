@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Inspection, Response
 from business.models import Business
 
@@ -31,4 +31,15 @@ class InspectionListView(ListView):
     paginate_by = 10
     queryset = Response.objects.select_related('inspection').prefetch_related('inspectors')
     
+    
+class InspectionDetailView(DetailView):
+    model = Inspection
+    template_name = "checklist/inspection_detail.html"
+    context_object_name = 'inspection_detail'
+    queryset = Inspection.objects.all().select_related('branch_store').prefetch_related('inspectors')
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
     
