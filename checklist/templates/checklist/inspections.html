@@ -80,9 +80,9 @@
                             </td>
                           <td class="project-state">
                               <span class="badge  
-                                {% if queryset.inspection.classification == 0 %}
+                                {% if inspection.classification == 'low' %}
                                     badge-success
-                                {% elif queryset.inspection.classification == 1 %}
+                                {% elif inspection.classification == 'middle' %}
                                     badge-warning
                                 {% else %}
                                     badge-danger
