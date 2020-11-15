@@ -20,5 +20,5 @@ from .views import BranchStoreListView, ActivityListView, ActivityDetailView
 urlpatterns = [
     path('', BranchStoreListView.as_view(), name='stores'),
     path('activities', ActivityListView.as_view(), name='activities'),
-    path('activity/<slug:slug>/', ActivityListView.as_view(), name='activity-detail'),
+    path('activity/<slug:slug>/', ActivityDetailView.as_view(), name='activity-detail'),
 ]

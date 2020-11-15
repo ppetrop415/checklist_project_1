@@ -20,7 +20,7 @@
               <div class="col-12">
                 <h4>
                   <i class="fas fa-globe"></i> Sanitary, Inc.
-                  <small class="float-right">{{inspection_detail.response}}</small>
+                  <small class="float-right">{{inspection_detail.responses.all.0.created}}</small>
                 </h4>
               </div>
               <!-- /.col -->
@@ -29,10 +29,10 @@
             <!-- Inpection UUID row-->
             <div class="row mb-3 mt-3">
               <div class="col-sm-8">
-                <b>Inspection ID:</b> 123e4567-e89b-12d3-a456-426614174000
+                <b>Inspection ID:</b> {{inspection_detail.responses.all.0.inspection_uuid}}
               </div>  
               <div class="col-sm-4">
-                <b>Classification:</b> <span class="badge badge-danger">High Risk</span>
+                <b>Classification:</b> <span class="badge badge-danger">{{inspection_detail.classification}}</span>
                 <br>
               </div>
             </div>
@@ -52,11 +52,11 @@
               <div class="col-sm-6 invoice-col">
                 To
                 <address>
-                  <strong>MC Donalts</strong><br>
-                  Oidipodos 33, 10443<br>
-                  Athens, Greece<br>
+                  <strong>{{inspection_detail.branch_store.title}}</strong><br>
+                  {{inspection_detail.branch_store.address}} {{inspection_detail.branch_store.address_number}}, {{inspection_detail.branch_store.zip_code}}<br>
+                  {{inspection_detail.branch_store.state}}, {{inspection_detail.branch_store.region}}<br>
                   Phone: (+30) 2105152778<br>
-                  Email: mcdonalts@gmail.com
+                  Email: {{inspection_detail.branch_store.email}}
                 </address>
               </div>
               <!-- /.col -->
@@ -66,8 +66,8 @@
                 <br>
                 <b>Inspector 1:</b> Petropoulos Panagiotis<br>
                 <b>Inspector 2:</b> Kyriakaki Sofia<br>
-                <b>Owner:</b> Kyriakaki Sofia<br>
-                <b>Health Regulator:</b> Kyriakaki Sofia<br>
+                <b>Owner:</b> {{inspection_detail.branch_store.business.owner.get_full_name}}<br>
+                <b>Health Regulator:</b> {{inspection_detail.branch_store.health_regulator.get_full_name}}<br>
                 <br>
               </div>
               <!-- /.col -->
@@ -76,10 +76,10 @@
               
                 
                 <br>
-                <b>Notify Number:</b> 1157878 (ver 1)<br>
-                <b>Type of Activity:</b> Επιχείρηση Μαζικής Εστίασης Πλήρους Επεξεργασίας<br>
+                <b>Notify Number:</b> {{inspection_detail.branch_store.notify_number}}<br>
+                <b>Type of Activity:</b> {{inspection_detail.branch_store.activity}}<br>
                 <br>
-                <b>Total score:</b> 150<br>
+                <b>Total score:</b> {{inspection_detail.score}}<br>
                 <br>
                 
               </div>
@@ -94,6 +94,8 @@
                 <table class="table">
                   <thead class="bg-dark">
                   <tr>
+
+                               
                     <th>Αρχεία Τεκμηρίωσης Διαδικασιών</th>
                     <th style="text-align: center;">Αποτέλεσμα</th>
                     <th style="text-align: center; width: 300px;">Παρατηρήσεις</th>

@@ -26,5 +26,5 @@ class ActivityListView(ListView):
 class ActivityDetailView(DetailView):
     model = Activity
     template_name = "business/activity_detail.html"
-    context_object_name = 'activity'
+    context_object_name = 'activity_detail'
     queryset = Activity.objects.all().prefetch_related('checklisttab_set').prefetch_related('checklisttab_set__items')
