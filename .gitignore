@@ -4,3 +4,5 @@ migrations
 
 uploaded_media/
 *.pyc
+checklist/__pycache__/admin.cpython-39.pyc
+*.pyc
