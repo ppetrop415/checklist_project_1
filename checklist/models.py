@@ -62,6 +62,7 @@ class Inspection(models.Model):
     class Meta:
         verbose_name = _("Inspection")
         verbose_name_plural = _("Inspections")
+        ordering = ("-id",)
 
     def __str__(self):
         return str(self.branch_store)

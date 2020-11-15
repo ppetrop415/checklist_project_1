@@ -46,16 +46,22 @@
                     </thead>
                     <tbody>
 
-                    {% for queryset in page_obj %}                 
+                    {% for inspection in page_obj %}                 
 
                         <tr>
-                            <td>#</td>
+                            <td>{{inspection.id}}</td>
                             <td>
-                                <a>{{queryset.inspection.branch_store}}</a>
+                                <a>{{inspection.branch_store}}</a>
                                 <br/>
-                                <small>{{queryset.created}}</small>
+                                
+                                
+                                <small>{{inspection.responses.all.0.created}}</small>
                                 <br/> 
-                                <small><b>#</b>{{queryset.inspection_uuid}}</small>
+                                <small><b>#</b>{{inspection.responses.all.0.inspection_uuid}}</small>
+                                <br>
+
+                                    
+
 
                             </td>
                             <td>
@@ -75,7 +81,7 @@
                                     </div>
                                 </div>
                                 <small>
-                                    {{queryset.inspection.score}}
+                                    {{inspection.score}}
                                 </small>
                             </td>
                           <td class="project-state">
@@ -86,10 +92,10 @@
                                     badge-warning
                                 {% else %}
                                     badge-danger
-                                {% endif %}">{{queryset.inspection.classification }}</span>
+                                {% endif %}">{{inspection.classification }}</span>
                           </td>
                           <td class="project-actions text-right">
-                              <a class="btn btn-primary btn-sm" href="{{ queryset.inspection.get_absolute_url }}">
+                              <a class="btn btn-primary btn-sm" href="{{ inspection.get_absolute_url }}">
                                   <i class="fas fa-eye">
                                   </i>
   

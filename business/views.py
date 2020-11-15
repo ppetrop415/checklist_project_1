@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import BranchStore, Activity
 from django.views.generic import ListView, DetailView
-
+from checklist.models import CheckListTab, CheckListTabItem
 # Create your views here.
  
 
@@ -27,14 +27,4 @@ class ActivityDetailView(DetailView):
     model = Activity
     template_name = "business/activity_detail.html"
     context_object_name = 'activity'
-
-
-# def branchstore(request):
-    
-#     stores = BranchStore.objects.all()
-
-#     context = {
-#         'stores':stores
-#     }
-
-#     return render(request, 'business/stores.html', context) 
+    queryset = Activity.objects.all().prefetch_related('checklisttab_set').prefetch_related('checklisttab_set__items')

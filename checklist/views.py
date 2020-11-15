@@ -29,7 +29,10 @@ class InspectionListView(ListView):
     template_name = "checklist/inspections.html"
     context_object_name = 'inspections'
     paginate_by = 10
-    queryset = Response.objects.select_related('inspection').prefetch_related('inspectors')
+    queryset = Inspection.objects.select_related("branch_store").prefetch_related('responses')
+
+    
+
     
     
 class InspectionDetailView(DetailView):
