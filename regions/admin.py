@@ -6,7 +6,6 @@ from .models import Region, RegionUnity, State, ZipCode
 class RegionAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
 
-
 class RegionUnityAdmin(admin.ModelAdmin):
     list_display = ("title", "region",)
     list_filter = ("region", )
