@@ -18,7 +18,7 @@ class BusinessAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
 
 class BranchStoreAdmin(admin.ModelAdmin):
-    list_display = ("title", "health_regulator","region", "notify_number", "address", "address_number",)
+    list_display = ("notify_number", "business", "title", "health_regulator","region", "address", "address_number",)
     list_filter = ("business__title", )
     prepopulated_fields = {"slug": ("title", )}
 

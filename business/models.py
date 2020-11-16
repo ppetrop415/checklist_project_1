@@ -41,9 +41,9 @@ class BranchStore(models.Model):
         (BRANCH, _("Branch")),
     ]
 
+    business = models.ForeignKey(Business, on_delete=models.PROTECT, related_name="branchstores")
     title = models.CharField(_("Category"), max_length=10, choices=DISPLAY_METHOD_CHOICES)
     slug = models.SlugField(blank=True)
-    business = models.ForeignKey(Business, on_delete=models.PROTECT, related_name="branchstores")
     health_regulator = models.ForeignKey(User, on_delete=models.PROTECT)
     notify_number = models.IntegerField()
     region = models.ForeignKey(Region, on_delete=models.PROTECT, related_name="branchstores")
@@ -61,7 +61,7 @@ class BranchStore(models.Model):
         verbose_name_plural = _("Branch Stores")
 
     def __str__(self):
-        return self.title
+        return str(self.notify_number)
 
     def get_absolute_url(self):
         return reverse('inspection-detail', kwargs={'slug': self.slug})
