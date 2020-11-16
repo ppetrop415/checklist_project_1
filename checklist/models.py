@@ -69,30 +69,6 @@ class Inspection(models.Model):
 
     def get_sorted_tabs(self):
         return self.tabs.all().order_by('order')
-
-    def eav_report_data(self):
-        report_data = []
-        inspectors = self.inspectors.order_by('full_name')
-        tabs = self.tabs.get_sorted_tabs()
-        items = self.items.get_sorted_items()
-        for inspector in inspectors:
-            inspector_data = [inspector.full_name]
-            inspector_responses = inspector.get_response_dict()
-            for tab in tabs:
-                for item in items:
-                    if item.id in inspector_responses:
-                        inspector_data.append(inspector_responses[item.id])
-                    else:
-                        inspector_data.append(None)
-                report_data.append(inspector_data)
-            report_data.append(inspector_responses)
-        return tabs, items, report_data
-    
-    def get_inspectors(self):
-        return ", ".join([str(p) for p in self.inspectors.all()])
-    
-    def get_absolute_url(self):
-        return reverse('inspection-detail', kwargs={'pk': self.pk})
     
 
 class CheckListTab(models.Model):
@@ -135,8 +111,6 @@ class CheckListTabItem(models.Model):
     description = models.TextField(_("Description"), blank=True, null=True)
     tab = models.ForeignKey(CheckListTab, on_delete=models.SET_NULL, verbose_name=_("Tab"), blank=True, null=True, related_name="items")
     inspection = models.ForeignKey(Inspection, on_delete=models.SET_NULL, verbose_name=_("Inspection"), blank=True, null=True, related_name="items")
-    # type = models.CharField(_("Type"), max_length=100, choices=QUESTION_TYPES, default=TEXT)
-    # choices = models.TextField(_("Choices"), blank=True, null=True, help_text=CHOICES_HELP_TEXT)
     choices = models.ManyToManyField(Choise)
     order = models.PositiveSmallIntegerField(_("Display order"), blank=True, null=True)
     comment = models.TextField(_("Comment"), blank=True, null=True)
@@ -149,9 +123,6 @@ class CheckListTabItem(models.Model):
     
     def __str__(self):
         return self.title
-
-
-
 
 class Response(models.Model):
 
