@@ -83,71 +83,11 @@ class Inspection(models.Model):
     def get_inspectors(self):
         return ", ".join([str(p) for p in self.inspectors.all()])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Response(models.Model):
-
-#     """
-#     A Response object is a collection of questions and answers with a
-#     unique interview uuid.
-#     """
-
-#     created = models.DateTimeField(_("Creation date"), auto_now_add=True)
-#     inspection = models.ForeignKey(Inspection, on_delete=models.PROTECT, verbose_name=_("Inspection"), related_name="responses")
-#     inspectors = models.ManyToManyField(User, verbose_name=_("Inspectors"))
-#     inspection_uuid = models.UUIDField(_("Inspection unique identifier"), default=uuid.uuid4, primary_key=True, editable=False)
-
-#     class Meta:
-#         verbose_name = _("Set of answers to Inspection Checklist")
-#         verbose_name_plural = _("Set of answers to Inspection Checklists")
-#         ordering = ("created",)
-
-#     def __str__(self):
-#         msg = "Response to {} by {}".format(self.inspection, self.inspectors)
-#         msg += " on {} with {}".format(self.created, self.inspection_uuid)
-#         return msg
-
-#     def get_inspectors(self):
-#         return ", ".join([str(p) for p in self.inspectors.all()])
-
-#     def get_response_dict(self):
-#         response_dict = dict()
-#         for answer in self.answers.all():
-#             response_dict[answer.checklistitem_id] = answer.body
-#         return response_dict
-
 # class Answer(models.Model):
 #     check_list_item = models.ForeignKey(CheckListTabItem, on_delete=models.CASCADE, verbose_name=_("Checklist Item"), related_name="answers")
-#     response = models.ForeignKey(Response, on_delete=models.CASCADE, verbose_name=_("Response"), related_name="answers")
-#     created = models.DateTimeField(_("Creation date"), auto_now_add=True)
+#     inspection = models.ForeignKey(Inspection, on_delete=models.CASCADE, verbose_name=_("Inspection"), related_name="answers")
 #     body = models.TextField(_("Choice"), blank=True, null=True)
+#     created = models.DateTimeField(_("Creation date"), auto_now_add=True)
 
 #     def __str__(self):
 #         return "{} to '{}' : '{}'".format(self.__class__.__name__, self.check_list_item, self.body)
