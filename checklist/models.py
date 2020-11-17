@@ -90,4 +90,4 @@ class Inspection(models.Model):
 #     created = models.DateTimeField(_("Creation date"), auto_now_add=True)
 
 #     def __str__(self):
-#         return "{} to '{}' : '{}'".format(self.__class__.__name__, self.check_list_item, self.body)
+#         return "{} to '{}' : '{}' in inspection -> '{}'".format(self.__class__.__name__, self.check_list_item, self.body, self.inspection)
