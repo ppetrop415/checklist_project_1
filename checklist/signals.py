@@ -1,0 +1,3 @@
+import django.dispatch
+
+inspection_completed = django.dispatch.Signal(providing_args=["instance", "data"])
