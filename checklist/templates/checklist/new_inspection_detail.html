@@ -1,0 +1,15 @@
+{% extends 'checklist/base.html' %}
+{% load i18n %}
+
+{% block content_header %}New Inspection{% endblock %}
+{% block content %}
+
+{% for form in response_form %}
+
+{% for fielf in form %}
+    {{field}}
+{% endfor %}
+    
+{% endfor %}
+
+{% endblock %}

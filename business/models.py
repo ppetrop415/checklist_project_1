@@ -13,8 +13,8 @@ class Activity(CommonFields):
         verbose_name_plural = _("Activities")
         ordering = ['order']
 
-    # def get_absolute_url(self):
-    #     return reverse('activity-detail', kwargs={'slug': self.slug})
+    def get_absolute_url(self):
+        return reverse('activity-detail', kwargs={'slug': self.slug})
 
 class TypeOfActivity(CommonFields):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)

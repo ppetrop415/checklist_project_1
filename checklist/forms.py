@@ -17,9 +17,11 @@ class InspectionForm(models.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """ Expects a survey object to be passed in initially """
+        self.branch_store = kwargs.pop("branchstore")
+        self.inspectors = kwargs.pop("inspectors")
         self.activity = kwargs.pop("activity")
         self.inspectors = kwargs.pop("inspectors")
-        self.branch_store = kwargs.pop("branch_store")
+        
 
 
         super(InspectionForm, self).__init__(*args, **kwargs)
@@ -41,6 +43,11 @@ class InspectionForm(models.ModelForm):
 
             self.add_question(question, data)
   
+    def current_categories(self):
+        extras = []
+        return self.categories + extras
+
+
     def _get_preexisting_inspection(self):
         """Recover a pre-existing response in database.
         The user must be logged. Will store the response retrieved in an attribute

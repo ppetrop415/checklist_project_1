@@ -1,0 +1,14 @@
+{% extends 'checklist/base.html' %}
+{% load i18n %}
+
+{% block content_header %}Confirm Inspection{% endblock %}
+{% block content %}
+
+<h1>{% trans "Survey submitted"%}</h1>
+<p>
+    <div class="alert alert-success">
+       {% trans "Thanks! Your answers have been saved" %}
+    </div>
+</p>
+
+{% endblock %}
