@@ -29,8 +29,8 @@ class InspectionForm(models.ModelForm):
         self.inspection = False
         self.answers = False
 
-
-
+        self.add_questions(kwargs.get("data"))
+        self._get_preexisting_response()
 
     def add_questions(self, data):
         # add a field for each survey question, corresponding to the question
@@ -40,10 +40,7 @@ class InspectionForm(models.ModelForm):
             not_to_keep = i != self.step and self.step is not None
 
             self.add_question(question, data)
-    
-
-
-
+  
     def _get_preexisting_inspection(self):
         """Recover a pre-existing response in database.
         The user must be logged. Will store the response retrieved in an attribute
@@ -126,8 +123,6 @@ class InspectionForm(models.ModelForm):
             # logging.debug("Field for %s : %s", question, field.__dict__)
             self.fields["check_list_item_%d" % check_list_item.pk] = field
 
-
-
     def save(self, commit=True):
         """ Save the response object """
         # Recover an existing response from the database if any
@@ -160,9 +155,8 @@ class InspectionForm(models.ModelForm):
                 
                 answer.body = field_value
                 data["responses"].append((answer.check_list_item.id, answer.body))
-                LOGGER.debug("Creating answer for question %d : %s", item_id, answer.check_list_item.type, field_value)
+                LOGGER.debug("Creating answer for question %d : %s", answer.check_list_item.tittle, field_value)
                 answer.response = inspection
                 answer.save()
         inspection_completed.send(sender=Inspection, instance=inspection, data=data)
         return inspection
-

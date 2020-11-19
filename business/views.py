@@ -1,8 +1,8 @@
 # from django.shortcuts import render
-# from .models import BranchStore, Activity
-# from django.views.generic import ListView, DetailView
-# from checklist.models import CheckListTab, CheckListTabItem
-# # Create your views here.
+from .models import BranchStore, Activity
+from django.views.generic import ListView, DetailView
+from checklist.models import CheckListTab, CheckListTabItem, Activity
+# Create your views here.
  
 
 
@@ -18,10 +18,11 @@
 #     template_name = "TEMPLATE_NAME"
 
 
-# class ActivityListView(ListView):
-#     model = Activity
-#     template_name = "business/activities.html"
-#     context_object_name = 'activities'
+
+class ActivityListView(ListView):
+    model = Activity
+    template_name = "business/activities.html"
+    context_object_name = 'activities'
 #     queryset = Activity.objects.all().prefetch_related('checklisttab_set').prefetch_related('checklisttab_set__items')
 
 
