@@ -23,7 +23,7 @@ class Choice(models.Model):
         return str(self.number)
 
 class CheckListTab(CommonFields):
-    activity = models.ManyToManyField(Activity)
+    activity = models.ManyToManyField(Activity, related_name="tabs")
     order = models.PositiveSmallIntegerField(_("Display order"))
     
     class Meta(CommonFields.Meta):

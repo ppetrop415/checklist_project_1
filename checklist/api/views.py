@@ -12,7 +12,7 @@ class CheckListTabViewSet(viewsets.ModelViewSet):
     serializer_class = CheckListTabSerializer
 
 class ActivityViewSet(viewsets.ModelViewSet):
-    queryset = Activity.objects.prefetch_related('tabs')
+    queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
 
 class BranchStoreViewSet(viewsets.ModelViewSet):
