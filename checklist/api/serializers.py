@@ -31,6 +31,10 @@ class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
         fields = ['id', 'url','order', 'title', 'slug', 'tabs']
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
 
 class BranchStoreSerializer(serializers.ModelSerializer):
     
@@ -45,7 +49,11 @@ class BranchStoreSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = BranchStore
-        fields = ['id','business', 'title', 'slug', 'health_regulator', 'notify_number', 'region', 'region_unity', 'state', 'zip_code', 'address', 'address_number', 'email', 'activity', 'type_of_activity']
+        fields = ['id', 'url','business', 'title', 'slug', 'health_regulator', 'notify_number', 'region', 'region_unity', 'state', 'zip_code', 'address', 'address_number', 'email', 'activity', 'type_of_activity']
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
 
 class BusinessStoreSerializer(serializers.ModelSerializer):
 
@@ -53,7 +61,11 @@ class BusinessStoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Business
-        fields = ['id', 'title', 'slug', 'owner', 'vat', 'branchstores']
+        fields = ['id', 'url','title', 'slug', 'owner', 'vat', 'branchstores']
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
 
 class AnswerSerializer(serializers.ModelSerializer):
 

@@ -4,7 +4,7 @@ from ..models import CheckListTabItem, CheckListTab, Answer, Inspection
 from business.models import Activity, Business, BranchStore
 
 class CheckListTabItemViewSet(viewsets.ModelViewSet):
-    queryset = CheckListTabItem.objects.all()
+    queryset = CheckListTabItem.objects.prefetch_related('choices')
     serializer_class = CheckListTabItemSerializer
 
 class CheckListTabViewSet(viewsets.ModelViewSet):
@@ -12,16 +12,19 @@ class CheckListTabViewSet(viewsets.ModelViewSet):
     serializer_class = CheckListTabSerializer
 
 class ActivityViewSet(viewsets.ModelViewSet):
-    queryset = Activity.objects.all()
+    queryset = Activity.objects.prefetch_related('tabs')
     serializer_class = ActivitySerializer
+    lookup_field = 'slug'
 
 class BranchStoreViewSet(viewsets.ModelViewSet):
     queryset = BranchStore.objects.select_related('business', 'health_regulator', 'region', 'region_unity', 'state', 'zip_code', 'activity', 'type_of_activity')
     serializer_class = BranchStoreSerializer
+    lookup_field = 'slug'
 
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessStoreSerializer
+    lookup_field = 'slug'
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
