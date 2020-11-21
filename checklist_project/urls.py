@@ -16,11 +16,27 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from checklist.api.views import CheckListTabItemViewSet, CheckListTabViewSet, ActivityViewSet, BranchStoreViewSet, BusinessViewSet, AnswerViewSet, InspectionViewSet
+
+
+router = routers.DefaultRouter()
+router.register(r'items', CheckListTabItemViewSet)
+router.register(r'tabs', CheckListTabViewSet)
+router.register(r'activities', ActivityViewSet)
+router.register(r'branchstores', BranchStoreViewSet)
+router.register(r'businesses', BusinessViewSet)
+router.register(r'answers', AnswerViewSet)
+router.register(r'inspections', InspectionViewSet)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('checklist.urls')),
-    path('stores/', include('business.urls'))
+    # path('', include('checklist.urls')),
+    # path('stores/', include('business.urls'))
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 
 
